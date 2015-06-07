@@ -17,6 +17,7 @@ public class WaTorSim {
     public static WaTorSimProperties prop;
     private WaTorGrid grid;
     private Integer iterationCount;
+    private Boolean active;
 
     public WaTorSim() throws IOException {
         prop = new WaTorSimProperties();
@@ -31,10 +32,6 @@ public class WaTorSim {
         return GridUtils.getCellCount(grid, Shark.class);
     }
 
-    public boolean gameOver() {
-        return fishCount() <= 0 || sharkCount() <= 0;
-    }
-
     public void iterateGrid() {
         grid.iterateGrid();
     }
@@ -47,12 +44,20 @@ public class WaTorSim {
         return iterationCount;
     }
 
-    public void setIterationCount(Integer iterationCount) {
-        this.iterationCount = iterationCount;
+    public void resetIterationCount() {
+        this.iterationCount = 0;
     }
 
     public void incrementIterationCount() {
         this.iterationCount++;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public static void main(String [ ] args) {
@@ -60,12 +65,18 @@ public class WaTorSim {
             WaTorSim sim = new WaTorSim();
             UserInterface userInterface = new ConsoleInterface();
 
-            sim.setIterationCount(0);
+            sim.resetIterationCount();
 
-            while (!sim.gameOver()) {
+            sim.setActive(true);
+
+            while (sim.isActive()) {
                 userInterface.outputState(sim);
                 sim.iterateGrid();
                 sim.incrementIterationCount();
+
+                if (sim.fishCount() <= 0 || sim.sharkCount() <= 0) {
+                    sim.setActive(false);
+                }
             }
 
             userInterface.outputResult(sim);

@@ -8,7 +8,7 @@ import ogoding.wator.simulation.WaTorSim;
 public class ConsoleInterface implements UserInterface {
     public void outputState(WaTorSim sim) {
         System.out.println(sim.getGrid().toString());
-        System.out.println("IterationCount = [" + sim.getIterationCount() + "], Number of ogoding.wator.grid.cell.Fish = [" + sim.fishCount() + "], Number of Sharks = [" + sim.sharkCount() + "]");
+        System.out.println("IterationCount = [" + sim.getIterationCount() + "], Number of Fish = [" + sim.fishCount() + "], Number of Sharks = [" + sim.sharkCount() + "]");
     }
 
     public void outputResult(WaTorSim sim) {
