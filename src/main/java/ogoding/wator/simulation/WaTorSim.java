@@ -4,7 +4,7 @@ import ogoding.wator.grid.GridUtils;
 import ogoding.wator.grid.WaTorGrid;
 import ogoding.wator.grid.cell.Fish;
 import ogoding.wator.grid.cell.Shark;
-import ogoding.wator.simulation.userinterface.ConsoleInterface;
+import ogoding.wator.simulation.userinterface.impl.Graphics.GraphicsUserInterface;
 import ogoding.wator.simulation.userinterface.UserInterface;
 
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class WaTorSim {
     public static void main(String [ ] args) {
         try {
             WaTorSim sim = new WaTorSim();
-            UserInterface userInterface = new ConsoleInterface();
+            UserInterface userInterface = new GraphicsUserInterface(sim);
 
             sim.resetIterationCount();
 
@@ -76,6 +76,12 @@ public class WaTorSim {
 
                 if (sim.fishCount() <= 0 || sim.sharkCount() <= 0) {
                     sim.setActive(false);
+                }
+
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+
                 }
             }
 

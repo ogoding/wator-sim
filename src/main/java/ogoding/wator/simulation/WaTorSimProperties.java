@@ -9,34 +9,10 @@ import java.util.Properties;
  * Created by OliverPC on 6/7/2015.
  */
 public class WaTorSimProperties {
-    public Integer GRID_ROWS;
-    public Integer GRID_COLUMNS;
-    public Integer MAX_FISH;
-    public Integer MAX_SHARKS;
-    public Integer INITIAL_SHARK_ENERGY;
-    public Integer SHARK_INC;
-    public Integer SHARK_DEC;
-    public Integer GENERATIONS_BEFORE_REPRODUCE_FISH;
-    public Integer GENERATIONS_BEFORE_REPRODUCE_SHARK;
-
     private Properties properties;
 
     public WaTorSimProperties() throws IOException {
         loadPropertiesFile();
-        loadProperties();
-    }
-
-    private void loadProperties() {
-        GRID_ROWS = Integer.parseInt(properties.getProperty("grid.rows"));
-        GRID_COLUMNS = Integer.parseInt(properties.getProperty("grid.columns"));
-        MAX_FISH = Integer.parseInt(properties.getProperty("grid.sharks.maximum"));
-        MAX_SHARKS = Integer.parseInt(properties.getProperty("grid.fish.maximum"));
-
-        INITIAL_SHARK_ENERGY = Integer.parseInt(properties.getProperty("cell.shark.energy.initial"));
-        SHARK_INC = Integer.parseInt(properties.getProperty("cell.shark.energy.increase"));
-        SHARK_DEC = Integer.parseInt(properties.getProperty("cell.shark.energy.decrease"));
-        GENERATIONS_BEFORE_REPRODUCE_FISH = Integer.parseInt(properties.getProperty("cell.shark.generations.before.reproduce"));
-        GENERATIONS_BEFORE_REPRODUCE_SHARK = Integer.parseInt(properties.getProperty("cell.fish.generations.before.reproduce"));
     }
 
     public void loadPropertiesFile() throws IOException {
@@ -53,38 +29,58 @@ public class WaTorSimProperties {
     }
 
     public Integer getGridRows() {
-        return GRID_ROWS;
+        return Integer.parseInt(properties.getProperty("grid.rows"));
     }
 
     public Integer getGridColumns() {
-        return GRID_COLUMNS;
+        return Integer.parseInt(properties.getProperty("grid.columns"));
     }
 
     public Integer getMaxFish() {
-        return MAX_FISH;
+        return Integer.parseInt(properties.getProperty("grid.fish.maximum"));
     }
 
     public Integer getMaxSharks() {
-        return MAX_SHARKS;
+        return Integer.parseInt(properties.getProperty("grid.sharks.maximum"));
     }
 
     public Integer getInitialSharkEnergy() {
-        return INITIAL_SHARK_ENERGY;
+        return Integer.parseInt(properties.getProperty("cell.shark.energy.initial"));
     }
 
     public Integer getSharkInc() {
-        return SHARK_INC;
+        return Integer.parseInt(properties.getProperty("cell.shark.energy.increase"));
     }
 
     public Integer getSharkDec() {
-        return SHARK_DEC;
+        return Integer.parseInt(properties.getProperty("cell.shark.energy.decrease"));
     }
 
     public Integer getGenerationsBeforeReproduceFish() {
-        return GENERATIONS_BEFORE_REPRODUCE_FISH;
+        return Integer.parseInt(properties.getProperty("cell.shark.generations.before.reproduce"));
     }
 
     public Integer getGenerationsBeforeReproduceShark() {
-        return GENERATIONS_BEFORE_REPRODUCE_SHARK;
+        return Integer.parseInt(properties.getProperty("cell.fish.generations.before.reproduce"));
+    }
+
+    public String getSharksWinMessage() {
+        return properties.getProperty("sim.win.sharks");
+    }
+
+    public String getFishWinMessage() {
+        return properties.getProperty("sim.win.fish");
+    }
+
+    public String getGUITitle() {
+        return properties.getProperty("gui.window.title");
+    }
+
+    public Integer getGUIWindowWidth() {
+        return Integer.parseInt(properties.getProperty("gui.window.width"));
+    }
+
+    public Integer getGUIWindowHeight() {
+        return Integer.parseInt(properties.getProperty("gui.window.height"));
     }
 }
