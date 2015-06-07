@@ -1,3 +1,7 @@
+package ogoding.wator.grid.cell;
+
+import ogoding.wator.grid.WaTorGrid;
+
 /**
  * Created by OliverPC on 6/7/2015.
  */

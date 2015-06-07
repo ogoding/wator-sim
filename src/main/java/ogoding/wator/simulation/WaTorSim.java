@@ -1,3 +1,12 @@
+package ogoding.wator.simulation;
+
+import ogoding.wator.grid.GridUtils;
+import ogoding.wator.grid.WaTorGrid;
+import ogoding.wator.grid.cell.Fish;
+import ogoding.wator.grid.cell.Shark;
+import ogoding.wator.simulation.userinterface.ConsoleInterface;
+import ogoding.wator.simulation.userinterface.UserInterface;
+
 import java.io.IOException;
 
 /**
@@ -7,6 +16,7 @@ public class WaTorSim {
 
     public static WaTorSimProperties prop;
     private WaTorGrid grid;
+    private Integer iterationCount;
 
     public WaTorSim() throws IOException {
         prop = new WaTorSimProperties();
@@ -33,27 +43,32 @@ public class WaTorSim {
         return grid;
     }
 
+    public Integer getIterationCount() {
+        return iterationCount;
+    }
+
+    public void setIterationCount(Integer iterationCount) {
+        this.iterationCount = iterationCount;
+    }
+
+    public void incrementIterationCount() {
+        this.iterationCount++;
+    }
+
     public static void main(String [ ] args) {
         try {
             WaTorSim sim = new WaTorSim();
+            UserInterface userInterface = new ConsoleInterface();
 
-            int iterationCount = 0;
-
-            System.out.println(sim.getGrid().toString());
-            System.out.println("IterationCount = [" + iterationCount + "], Number of Fish = [" + sim.fishCount() + "], Number of Sharks = [" + sim.sharkCount() + "]");
+            sim.setIterationCount(0);
 
             while (!sim.gameOver()) {
+                userInterface.outputState(sim);
                 sim.iterateGrid();
-                iterationCount++;
-                System.out.println(sim.getGrid().toString());
-                System.out.println("IterationCount = [" + iterationCount + "], Number of Fish = [" + sim.fishCount() + "], Number of Sharks = [" + sim.sharkCount() + "]");
+                sim.incrementIterationCount();
             }
 
-            if (sim.fishCount() <= 0) {
-                System.out.println("Sharks ate all the fish!");
-            } else if (sim.sharkCount() <= 0) {
-                System.out.println("Sharks all died out!");
-            }
+            userInterface.outputResult(sim);
         } catch (IOException e) {
             System.out.println("Properties file not found. Exiting...");
         }

@@ -1,3 +1,8 @@
+package ogoding.wator.grid;
+
+import ogoding.wator.grid.cell.Cell;
+import ogoding.wator.grid.cell.GridPos;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -1,3 +1,9 @@
+package ogoding.wator.grid.cell;
+
+import ogoding.wator.simulation.WaTorSim;
+import ogoding.wator.grid.GridUtils;
+import ogoding.wator.grid.WaTorGrid;
+
 import java.util.List;
 import java.util.Random;
 
