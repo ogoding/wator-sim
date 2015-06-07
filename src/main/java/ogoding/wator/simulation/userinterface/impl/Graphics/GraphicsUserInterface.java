@@ -10,40 +10,43 @@ import java.awt.*;
  * Created by OliverPC on 6/7/2015.
  */
 public class GraphicsUserInterface implements UserInterface {
+    private final JFrame frame;
     private final JLabel stateLabel;
     private final GridPanel contentPanel;
 
     public GraphicsUserInterface(WaTorSim sim) {
-        // Create the window
-        JFrame f = new JFrame(WaTorSim.prop.getGUITitle());
+        frame = new JFrame(WaTorSim.prop.getGUITitle());
         Integer windowWidth = WaTorSim.prop.getGUIWindowWidth();
         Integer windowHeight = WaTorSim.prop.getGUIWindowHeight();
-        f.setPreferredSize(new Dimension(windowWidth, windowHeight));
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLayout(new FlowLayout());
+
+        System.out.println("windowHeight = " + windowHeight);
+        System.out.println("windowWidth = " + windowWidth);
+
+        frame.setPreferredSize(new Dimension(windowWidth, windowHeight));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
         // Add a label and a button
         JPanel titlePanel = new JPanel();
         titlePanel.setPreferredSize(new Dimension(windowWidth, 30));
         stateLabel = new JLabel("Hello world!");
         titlePanel.add(stateLabel);
 
-        contentPanel = new GridPanel(windowWidth - 20, windowHeight - 80, WaTorSim.prop.getGridRows(), WaTorSim.prop.getGridColumns());
-        contentPanel.createRectangles(sim.getGrid().getGrid());
+        contentPanel = new GridPanel(windowWidth - 20, windowHeight - 80, WaTorSim.prop.getGridRows(), WaTorSim.prop.getGridColumns(), sim.getGrid().getGrid());
 
-        f.add(titlePanel);
-        f.add(contentPanel);
+        frame.add(titlePanel);
+        frame.add(contentPanel);
         // Arrange the components inside the window
-        f.pack();
+        frame.pack();
         // By default, the window is not visible. Make it visible.
-        f.setVisible(true);
+        frame.setVisible(true);
     }
 
     @Override
     public void outputState(WaTorSim sim) {
         stateLabel.setText("Active = " + sim.isActive() + ", Number of iterations = " + sim.getIterationCount());
+        contentPanel.setCellGrid(sim.getGrid().getGrid());
         contentPanel.revalidate();
         contentPanel.repaint();
-        System.out.println("sim.getGrid() = \n" + sim.getGrid());
     }
 
     @Override

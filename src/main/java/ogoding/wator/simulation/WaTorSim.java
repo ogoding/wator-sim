@@ -77,12 +77,6 @@ public class WaTorSim {
                 if (sim.fishCount() <= 0 || sim.sharkCount() <= 0) {
                     sim.setActive(false);
                 }
-
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception e) {
-
-                }
             }
 
             userInterface.outputResult(sim);

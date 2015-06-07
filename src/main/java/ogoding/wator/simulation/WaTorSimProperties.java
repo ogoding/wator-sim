@@ -12,10 +12,6 @@ public class WaTorSimProperties {
     private Properties properties;
 
     public WaTorSimProperties() throws IOException {
-        loadPropertiesFile();
-    }
-
-    public void loadPropertiesFile() throws IOException {
         properties = new Properties();
         String propertyFileName = "config.properties";
 
