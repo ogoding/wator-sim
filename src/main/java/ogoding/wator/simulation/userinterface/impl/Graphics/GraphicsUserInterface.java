@@ -31,7 +31,7 @@ public class GraphicsUserInterface implements UserInterface {
         stateLabel = new JLabel("Hello world!");
         titlePanel.add(stateLabel);
 
-        contentPanel = new GridPanel(windowWidth - 20, windowHeight - 80, WaTorSim.prop.getGridRows(), WaTorSim.prop.getGridColumns(), sim.getGrid().getGrid());
+        contentPanel = new GridPanel(windowWidth - 20, windowHeight - 80, WaTorSim.prop.getGridRows(), WaTorSim.prop.getGridColumns(), sim.getGrid());
 
         frame.add(titlePanel);
         frame.add(contentPanel);
@@ -44,7 +44,6 @@ public class GraphicsUserInterface implements UserInterface {
     @Override
     public void outputState(WaTorSim sim) {
         stateLabel.setText("Active = " + sim.isActive() + ", Number of iterations = " + sim.getIterationCount());
-        contentPanel.setCellGrid(sim.getGrid().getGrid());
         contentPanel.revalidate();
         contentPanel.repaint();
     }

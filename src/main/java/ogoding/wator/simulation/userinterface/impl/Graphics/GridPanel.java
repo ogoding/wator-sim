@@ -1,5 +1,6 @@
 package ogoding.wator.simulation.userinterface.impl.Graphics;
 
+import ogoding.wator.grid.WaTorGrid;
 import ogoding.wator.grid.cell.Cell;
 import ogoding.wator.grid.cell.Fish;
 import ogoding.wator.grid.cell.Shark;
@@ -18,9 +19,9 @@ public class GridPanel extends JPanel {
     private final Integer rows;
     private final Integer cols;
 
-    private Cell[][] cellGrid;
+    private WaTorGrid grid;
 
-    public GridPanel(Integer width, Integer height, Integer rows, Integer cols, Cell[][] cellGrid) {
+    public GridPanel(Integer width, Integer height, Integer rows, Integer cols, WaTorGrid grid) {
         this.setPreferredSize(new Dimension(width, height));
 
         this.rows = rows;
@@ -30,7 +31,7 @@ public class GridPanel extends JPanel {
         this.cellWidth = width / cols;
         this.cellHeight = height / rows;
 
-        this.cellGrid = cellGrid;
+        this.grid = grid;
     }
 
     public List<CellRectangle> createRectangleList(Cell[][] cells) {
@@ -49,14 +50,14 @@ public class GridPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        for (CellRectangle rect : createRectangleList(cellGrid)) {
+        for (CellRectangle rect : createRectangleList(grid.getGrid())) {
             g2.setColor(rect.getCell() instanceof Fish ? Color.GREEN :
                     rect.getCell() instanceof Shark ? Color.BLUE : Color.WHITE);
             g2.fillRect(rect.x + 2, rect.y + 2, rect.width - 4, rect.height - 4);
         }
     }
 
-    public void setCellGrid(Cell[][] cellGrid) {
-        this.cellGrid = cellGrid;
+    public void setGrid(WaTorGrid grid) {
+        this.grid = grid;
     }
 }
